@@ -1,8 +1,32 @@
 use anchor_lang::prelude::*;
 
+pub const MAX_QUESTION_LEN: usize = 300;
+
 #[account]
 #[derive(InitSpace)]
-pub struct Counter {
-    pub count: u64,
-    pub authority: Pubkey,
+pub struct Market {
+   pub creator:Pubkey,
+   pub market_id: Pubkey,
+   #[max_len(MAX_QUESTION_LEN)]
+   pub question: String,
+   pub yes_pool: u64,
+   pub no_pool: u64,
+   pub resolved: bool,
+   pub outcome: Option<bool>,
+   pub resolution_time: i64,
+   pub creation_date: u64,
+   pub expiry_date: u64,
+   pub bump: u8,
 }
+
+#[account]
+#[derive(InitSpace)]
+pub struct UserPosition {
+    pub market: Pubkey,
+    pub user:Pubkey,
+    pub yes_amount: u64,
+    pub no_amount:u64, 
+    pub claimed: bool,
+    pub bump:u8,
+}
+
