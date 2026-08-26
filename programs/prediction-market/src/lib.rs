@@ -90,7 +90,11 @@ pub mod prediction_market {
             position.market = market.key();
             position.user = ctx.accounts.user.key();
             let (_, bump) = Pubkey::find_program_address(
-                &[b"position", market.key().as_ref(), ctx.accounts.user.key().as_ref()],
+                &[
+                    b"position",
+                    market.key().as_ref(),
+                    ctx.accounts.user.key().as_ref(),
+                ],
                 ctx.program_id,
             );
             position.bump = bump;
@@ -111,7 +115,7 @@ pub mod prediction_market {
         Ok(())
     }
 
-    pub fn resolve_market(ctx:Context<ResolveMarket>,outcome:bool)->Result<()>{
+    pub fn resolve_market(ctx: Context<ResolveMarket>, outcome: bool) -> Result<()> {
         let clock = Clock::get()?;
         let market = &ctx.accounts.market;
 
@@ -120,11 +124,50 @@ pub mod prediction_market {
             MarketError::MarketNotResolved
         );
 
-        require!(!market.resolved,MarketError::MarketResolved);
+        require!(!market.resolved, MarketError::MarketResolved);
 
-       let market = &mut ctx.accounts.market;
-       market.resolved = true;
-       market.outcome = Some(outcome);
+        let market = &mut ctx.accounts.market;
+        market.resolved = true;
+        market.outcome = Some(outcome);
+        Ok(())
+    }
+
+    pub fn claim_winnings(ctx: Context<Claiminnings>) -> Result<()> {
+        let market = &ctx.accounts.market;
+        let postition = &ctx.accounts.user_position;
+
+        require!(market.resolved, MarketError::MarketNotResolved);
+
+        require!(!position.claimed, MarketError::AlreadyClaimed);
+
+        let outcome = market.outcome.unwrap();
+
+        let (user_winning_bet, total_winning_pool, total_losing_pool) = if outcome {
+            (position.yes_amount, market.yes_pool, market.no_pool)
+        } else {
+            (position.no_amount, market.no_pool, market.yes_pool)
+        };
+
+        require!(user_winning_bet > 0, MarketError::NoPosition);
+
+        let winnings = (user_winning_bet as u128)
+            .checked_mul(total_winning_pool as u128)
+            .ok_or(MarketError::OverFlow)?
+            .checked_div(total_winning_pool as u128)
+            .ok_or(MarketError::OverFlow)? as u64;
+
+        let total_payout = user_winning_bet
+            .checked_add(winnings)
+            .ok_or(MarketError::OverFlow)?;
+
+        let market_account_info = ctx.accounts.market.to_account_info();
+        let user_account_info = ctx.accounts.user.to_account_info();
+
+        **market_account_info.try_borrow_mut_lamports()? -= total_payout;
+        **user_account_info.try_borrow_mut_lamports()? += total_payout;
+
+        let position = &mut ctx.accounts.user_position;
+        position.claimed = true;
         Ok(())
     }
 }
