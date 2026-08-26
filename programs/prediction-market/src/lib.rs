@@ -13,6 +13,8 @@ declare_id!("BvCRDzi8M5f5NREyoKZ62bjxR5kN1yiKu4iHqTmFCzcY");
 
 #[program]
 pub mod prediction_market {
+    use std::marker;
+
     use anchor_lang::system_program::transfer;
 
     use super::*;
@@ -83,15 +85,16 @@ pub mod prediction_market {
                 .ok_or(MarketError::OverFlow)?;
         }
 
-        let user_position = &mut ctx.accounts.user_position;
-        if position.market == Pubkey::default(){
+        let position = &mut ctx.accounts.user_position;
+        if position.market == Pubkey::default() {
             position.market = market.key();
             position.user = ctx.accounts.user.key();
-            let (_,bump) = Pubkey::find_program_address(
-                &[b"position",market.key(),ctx.accounts.user.key().as_ref()],ctx.program_id,
+            let (_, bump) = Pubkey::find_program_address(
+                &[b"position", market.key().as_ref(), ctx.accounts.user.key().as_ref()],
+                ctx.program_id,
             );
             position.bump = bump;
-        }       
+        }
 
         if bet_yes {
             position.yes_amount = position
@@ -105,6 +108,23 @@ pub mod prediction_market {
                 .ok_or(MarketError::OverFlow)?;
         }
 
+        Ok(())
+    }
+
+    pub fn resolve_market(ctx:Context<ResolveMarket>,outcome:bool)->Result<()>{
+        let clock = Clock::get()?;
+        let market = &ctx.accounts.market;
+
+        require!(
+            clock.unix_timestamp >= market.resolution_time,
+            MarketError::MarketNotResolved
+        );
+
+        require!(!market.resolved,MarketError::MarketResolved);
+
+       let market = &mut ctx.accounts.market;
+       market.resolved = true;
+       market.outcome = Some(outcome);
         Ok(())
     }
 }
