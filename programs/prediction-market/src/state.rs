@@ -6,7 +6,7 @@ pub const MAX_QUESTION_LEN: usize = 300;
 #[derive(InitSpace)]
 pub struct Market {
    pub creator:Pubkey,
-   pub market_id: Pubkey,
+   pub market_id: u64,
    #[max_len(MAX_QUESTION_LEN)]
    pub question: String,
    pub yes_pool: u64,

@@ -1,21 +1,18 @@
 pub mod constants;
 pub mod error;
-pub mod instructions;
 pub mod state;
 
 use anchor_lang::prelude::*;
 
 pub use constants::*;
-pub use instructions::*;
+pub use error::*;
 pub use state::*;
 
 declare_id!("BvCRDzi8M5f5NREyoKZ62bjxR5kN1yiKu4iHqTmFCzcY");
 
 #[program]
 pub mod prediction_market {
-    use std::marker;
-
-    use anchor_lang::system_program::transfer;
+    use anchor_lang::system_program::{transfer, Transfer};
 
     use super::*;
 
@@ -44,7 +41,7 @@ pub mod prediction_market {
         market.no_pool = 0;
         market.resolved = false;
         market.outcome = None;
-        market.bump = bump;
+        market.bump = ctx.bumps.market;
         Ok(())
     }
 
@@ -62,7 +59,7 @@ pub mod prediction_market {
 
         transfer(
             CpiContext::new(
-                ctx.accounts.system_program.to_account_info(),
+                ctx.accounts.system_program.key(),
                 Transfer {
                     from: ctx.accounts.user.to_account_info(),
                     to: ctx.accounts.market.to_account_info(),
@@ -132,9 +129,9 @@ pub mod prediction_market {
         Ok(())
     }
 
-    pub fn claim_winnings(ctx: Context<Claiminnings>) -> Result<()> {
+    pub fn claim_winnings(ctx: Context<ClaimWinnings>) -> Result<()> {
         let market = &ctx.accounts.market;
-        let postition = &ctx.accounts.user_position;
+        let position = &ctx.accounts.user_position;
 
         require!(market.resolved, MarketError::MarketNotResolved);
 
@@ -150,8 +147,15 @@ pub mod prediction_market {
 
         require!(user_winning_bet > 0, MarketError::NoPosition);
 
+
+        // for example
+        // user_winning_bet(my bet) = 20
+        // total_losing_pool(opposing bet) = 40
+        // total_winning_pool(my bet) = 20
+        // 20 * 40 / 20 = 40   
+        // total amount i get is 40+20 = 60 (winnings + my initial bet)
         let winnings = (user_winning_bet as u128)
-            .checked_mul(total_winning_pool as u128)
+            .checked_mul(total_losing_pool as u128)
             .ok_or(MarketError::OverFlow)?
             .checked_div(total_winning_pool as u128)
             .ok_or(MarketError::OverFlow)? as u64;
@@ -170,4 +174,75 @@ pub mod prediction_market {
         position.claimed = true;
         Ok(())
     }
+}
+
+
+#[derive(Accounts)]
+#[instruction(market_id: u64, question: String)]
+pub struct CreateMarket<'info> {
+    #[account(mut)]
+    pub creator: Signer<'info>,
+
+    #[account(
+        init,
+        payer = creator,
+        space = 8 + Market::INIT_SPACE,
+        seeds = [b"market", creator.key().as_ref(), &market_id.to_le_bytes()],
+        bump,
+    )]
+    pub market: Account<'info, Market>,
+
+    pub system_program: Program<'info, System>,
+}
+
+#[derive(Accounts)]
+pub struct PlaceBet<'info> {
+    #[account(mut)]
+    pub user: Signer<'info>,
+
+    #[account(mut)]
+    pub market: Account<'info, Market>,
+
+    #[account(
+        init_if_needed,
+        payer = user,
+        space = 8 + UserPosition::INIT_SPACE,
+        seeds = [b"position", market.key().as_ref(), user.key().as_ref()],
+        bump,
+    )]
+    pub user_position: Account<'info, UserPosition>,
+
+    pub system_program: Program<'info, System>,
+}
+
+#[derive(Accounts)]
+pub struct ResolveMarket<'info> {
+    #[account(
+        constraint = creator.key() == market.creator
+    )]
+    pub creator: Signer<'info>,
+
+    #[account(mut)]
+    pub market: Account<'info, Market>,
+}
+
+#[derive(Accounts)]
+pub struct ClaimWinnings<'info> {
+    #[account(mut)]
+    pub user: Signer<'info>,
+
+    #[account(
+        mut,
+        seeds = [b"market", market.creator.as_ref(), &market.market_id.to_le_bytes()],
+        bump = market.bump,
+    )]
+    pub market: Account<'info, Market>,
+
+    #[account(
+        mut,
+        seeds = [b"position", market.key().as_ref(), user.key().as_ref()],
+        bump = user_position.bump,
+        constraint = user_position.user == user.key(),
+    )]
+    pub user_position: Account<'info, UserPosition>,
 }
