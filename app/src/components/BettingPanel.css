@@ -1,0 +1,122 @@
+.betting-panel {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.side-selector {
+  display: flex;
+  background: rgba(0,0,0,0.2);
+  border-radius: 12px;
+  padding: 4px;
+}
+
+.side-btn {
+  flex: 1;
+  padding: 12px;
+  font-weight: 700;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  transition: all var(--transition-speed) ease;
+}
+
+.yes-side.active {
+  background-color: var(--yes-bg);
+  color: var(--yes-color);
+  box-shadow: 0 4px 12px rgba(0, 211, 149, 0.2);
+}
+
+.no-side.active {
+  background-color: var(--no-bg);
+  color: var(--no-color);
+  box-shadow: 0 4px 12px rgba(255, 59, 105, 0.2);
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input-group label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  border-radius: 8px;
+  padding: 12px 16px;
+  padding-right: 40px;
+  color: var(--text-primary);
+  font-size: 1.125rem;
+  font-weight: 600;
+  outline: none;
+  transition: border-color var(--transition-speed) ease;
+}
+
+.input-wrapper input:focus {
+  border-color: var(--accent-color);
+}
+
+.currency-suffix {
+  position: absolute;
+  right: 16px;
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
+.submit-bet-btn {
+  padding: 16px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1.125rem;
+  transition: all var(--transition-speed) ease;
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.submit-bet-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.submit-bet-btn:not(:disabled):hover {
+  transform: translateY(-2px);
+}
+
+.submit-bet-btn.yes-active:not(:disabled) {
+  background-color: var(--yes-color);
+  box-shadow: 0 8px 24px rgba(0, 211, 149, 0.3);
+}
+
+.submit-bet-btn.no-active:not(:disabled) {
+  background-color: var(--no-color);
+  box-shadow: 0 8px 24px rgba(255, 59, 105, 0.3);
+}
+
+.resolved-panel {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1.5rem;
+}
+
+.outcome-text {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+}
+
+.outcome-text strong {
+  color: var(--accent-color);
+}

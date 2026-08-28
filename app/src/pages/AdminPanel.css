@@ -1,0 +1,119 @@
+.admin-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.admin-page h1 {
+  margin-bottom: 2rem;
+}
+
+.admin-card {
+  padding: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.admin-card h2, .admin-markets h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.input-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.input-group input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.admin-btn {
+  background-color: var(--accent-color);
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: 700;
+  transition: all var(--transition-speed) ease;
+}
+
+.admin-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.admin-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.markets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.admin-market-item {
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.q-text {
+  font-weight: 600;
+  font-size: 1.125rem;
+  margin: 0;
+}
+
+.resolve-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.resolve-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.875rem;
+  transition: all var(--transition-speed) ease;
+}
+
+.resolve-btn.yes {
+  background-color: rgba(0, 211, 149, 0.1);
+  color: var(--yes-color);
+}
+
+.resolve-btn.yes:hover {
+  background-color: var(--yes-color);
+  color: var(--bg-color);
+}
+
+.resolve-btn.no {
+  background-color: rgba(255, 59, 105, 0.1);
+  color: var(--no-color);
+}
+
+.resolve-btn.no:hover {
+  background-color: var(--no-color);
+  color: var(--bg-color);
+}
+
+.resolved-status {
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}

@@ -1,0 +1,116 @@
+.market-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all var(--transition-speed) ease;
+  height: 100%;
+}
+
+.market-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.market-header {
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.market-question {
+  font-size: 1.125rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.market-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+.stat-item {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.stat-label {
+  color: var(--text-secondary);
+}
+
+.stat-value {
+  font-weight: 600;
+}
+
+.stat-value.active {
+  color: var(--accent-color);
+}
+
+.stat-value.resolved {
+  color: #fbbf24;
+}
+
+.market-probabilities {
+  display: flex;
+  height: 6px;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  background: var(--bg-color-light);
+}
+
+.prob-bar {
+  height: 100%;
+  transition: width 0.5s ease;
+}
+
+.yes-bar {
+  background-color: var(--yes-color);
+}
+
+.no-bar {
+  background-color: var(--no-color);
+}
+
+.market-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.bet-btn {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all var(--transition-speed) ease;
+}
+
+.yes-btn {
+  background-color: var(--yes-bg);
+  color: var(--yes-color);
+}
+
+.yes-btn:hover {
+  background-color: var(--yes-color);
+  color: var(--bg-color);
+}
+
+.no-btn {
+  background-color: var(--no-bg);
+  color: var(--no-color);
+}
+
+.no-btn:hover {
+  background-color: var(--no-color);
+  color: var(--bg-color);
+}
+
+.prob-text {
+  font-weight: 700;
+}
