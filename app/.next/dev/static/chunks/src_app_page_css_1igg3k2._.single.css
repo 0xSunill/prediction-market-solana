@@ -1,0 +1,49 @@
+/* [project]/src/app/page.css [app-client] (css) */
+.home-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.hero-section {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 4rem 0;
+}
+
+.hero-title {
+  background: linear-gradient(to right, #fff, #8b949e);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  margin-bottom: 1rem;
+  font-size: 4rem;
+}
+
+.hero-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+}
+
+.markets-header {
+  border-bottom: 1px solid var(--border-glass);
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+}
+
+.markets-grid {
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+  display: grid;
+}
+
+.loading-state, .empty-state {
+  text-align: center;
+  color: var(--text-secondary);
+  background: var(--bg-glass);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-glass);
+  padding: 4rem;
+  font-size: 1.125rem;
+}
+
+/*# sourceMappingURL=src_app_page_css_1igg3k2._.single.css.map*/

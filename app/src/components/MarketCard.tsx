@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { formatCurrency } from '../utils/constants';
 import './MarketCard.css';
 
@@ -25,7 +25,7 @@ export function MarketCard({ market }: { market: MarketData }) {
   const noProb = total > 0 ? Math.round((no / total) * 100) : 50;
 
   return (
-    <Link to={`/market/${market.account.marketId}`} className="market-card glass-panel animate-fade-in">
+    <Link href={`/market/${market.account.marketId}`} className="market-card glass-panel animate-fade-in">
       <div className="market-header">
         <h3 className="market-question">{question}</h3>
       </div>

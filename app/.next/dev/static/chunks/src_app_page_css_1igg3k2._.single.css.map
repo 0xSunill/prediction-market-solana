@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/app/page.css"],"sourcesContent":[".home-page {\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 2rem;\n}\n\n.hero-section {\n  text-align: center;\n  padding: 4rem 0;\n  margin-bottom: 2rem;\n}\n\n.hero-title {\n  font-size: 4rem;\n  background: linear-gradient(to right, #fff, #8b949e);\n  -webkit-background-clip: text;\n  -webkit-text-fill-color: transparent;\n  margin-bottom: 1rem;\n}\n\n.hero-subtitle {\n  font-size: 1.25rem;\n  color: var(--text-secondary);\n}\n\n.markets-header {\n  margin-bottom: 2rem;\n  border-bottom: 1px solid var(--border-glass);\n  padding-bottom: 1rem;\n}\n\n.markets-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));\n  gap: 1.5rem;\n}\n\n.loading-state, .empty-state {\n  text-align: center;\n  padding: 4rem;\n  color: var(--text-secondary);\n  font-size: 1.125rem;\n  background: var(--bg-glass);\n  border-radius: var(--border-radius);\n  border: 1px solid var(--border-glass);\n}\n"],"names":[],"mappings":"AAAA;;;;;;AAMA;;;;;;AAMA;;;;;;;;AAQA;;;;;AAKA;;;;;;AAMA;;;;;;AAMA"}}]
+}
