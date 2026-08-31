@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { formatSol } from '../utils/constants';
+import { formatSol, formatDateTime, timeUntil } from '../utils/constants';
 import './MarketCard.css';
 
 export interface MarketData {
@@ -18,12 +18,8 @@ export interface MarketData {
 
 export function MarketCard({ market }: { market: MarketData }) {
   const { question, yesPool, noPool, resolved, outcome, resolutionTime } = market.account;
-  const resolveDate = new Date(Number(resolutionTime) * 1000);
-  const resolveDateStr = resolveDate.toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  });
+  const resolveDateTime = formatDateTime(resolutionTime);
+  const countdown = timeUntil(resolutionTime);
 
   return (
     <div className="market-card glass-panel animate-fade-in">
@@ -37,7 +33,10 @@ export function MarketCard({ market }: { market: MarketData }) {
         <p className="market-resolves">
           {resolved
             ? `Resolved: ${outcome ? 'YES ✅' : 'NO ❌'}`
-            : `Resolves: ${resolveDateStr}`}
+            : <>
+                Resolves: <strong>{resolveDateTime}</strong>
+                {' '}<span className="countdown-badge">{countdown}</span>
+              </>}
         </p>
       </div>
 

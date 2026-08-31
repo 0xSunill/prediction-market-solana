@@ -54,6 +54,18 @@
   font-size: .8125rem;
 }
 
+.countdown-badge {
+  color: var(--accent-color);
+  vertical-align: middle;
+  background: #3b82f61f;
+  border-radius: 4px;
+  margin-left: 2px;
+  padding: .1rem .45rem;
+  font-size: .75rem;
+  font-weight: 700;
+  display: inline-block;
+}
+
 .market-card-actions {
   flex-shrink: 0;
   gap: .625rem;

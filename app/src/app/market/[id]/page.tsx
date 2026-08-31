@@ -10,7 +10,8 @@ import { ArrowLeft } from 'lucide-react';
 import { useProgram } from '../../../hooks/useProgram';
 import { useUserPosition } from '../../../hooks/useUserPosition';
 import type { MarketData } from '../../../components/MarketCard';
-import { PROGRAM_ID, formatSol, lamportsToSol, LAMPORTS_PER_SOL } from '../../../utils/constants';
+import { PROGRAM_ID, formatSol, lamportsToSol, LAMPORTS_PER_SOL, formatDateTime, timeUntil } from '../../../utils/constants';
+import { sendTx, extractErrorMessage } from '../../../utils/sendTx';
 import './page.css';
 
 export default function MarketDetail() {
@@ -51,7 +52,7 @@ export default function MarketDetail() {
         });
       }
     } catch (e) {
-      console.error(e);
+      console.error(String(e));
     }
   };
 
@@ -91,13 +92,12 @@ export default function MarketDetail() {
         .instruction();
 
       const { Transaction } = await import('@solana/web3.js');
-      const sig = await sendTransaction(new Transaction().add(ix), connection);
-      await connection.confirmTransaction(sig, 'processed');
+      await sendTx(new Transaction().add(ix), connection, publicKey, sendTransaction);
       setAmount('');
       refresh();
     } catch (e: any) {
-      console.error(e);
-      setTxError(e?.message ?? 'Transaction failed.');
+      console.error(String(e));
+      setTxError(extractErrorMessage(e));
     } finally {
       setBetLoading(false);
     }
@@ -118,12 +118,11 @@ export default function MarketDetail() {
         .instruction();
 
       const { Transaction } = await import('@solana/web3.js');
-      const sig = await sendTransaction(new Transaction().add(ix), connection);
-      await connection.confirmTransaction(sig, 'processed');
+      await sendTx(new Transaction().add(ix), connection, publicKey, sendTransaction);
       refresh();
     } catch (e: any) {
-      console.error(e);
-      setTxError(e?.message ?? 'Resolve failed. Check console.');
+      console.error(String(e));
+      setTxError(extractErrorMessage(e));
     } finally {
       setResolveLoading(false);
     }
@@ -151,12 +150,11 @@ export default function MarketDetail() {
         .instruction();
 
       const { Transaction } = await import('@solana/web3.js');
-      const sig = await sendTransaction(new Transaction().add(ix), connection);
-      await connection.confirmTransaction(sig, 'processed');
+      await sendTx(new Transaction().add(ix), connection, publicKey, sendTransaction);
       refresh();
     } catch (e: any) {
-      console.error(e);
-      setTxError(e?.message ?? 'Claim failed. Check console.');
+      console.error(String(e));
+      setTxError(extractErrorMessage(e));
     } finally {
       setClaimLoading(false);
     }
@@ -174,11 +172,8 @@ export default function MarketDetail() {
   const { question, yesPool, noPool, resolved, outcome, resolutionTime, creator } = market.account;
   const yes = Number(yesPool);
   const no = Number(noPool);
-  const resolutionDate = new Date(Number(resolutionTime) * 1000).toLocaleDateString('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  });
+  const resolutionDateTime = formatDateTime(resolutionTime);
+  const countdown = timeUntil(resolutionTime);
 
   const isCreator = publicKey && creator === publicKey.toString();
   const pastResolution = Date.now() / 1000 > Number(resolutionTime);
@@ -228,7 +223,10 @@ export default function MarketDetail() {
           </div>
           <div className="pool-stat">
             <span className="stat-label">Resolution</span>
-            <span className="stat-value">{resolutionDate}</span>
+            <span className="stat-value">{resolutionDateTime}</span>
+            {!resolved && (
+              <span className="detail-countdown">{countdown}</span>
+            )}
           </div>
         </div>
 

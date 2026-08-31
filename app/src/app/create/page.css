@@ -66,8 +66,9 @@
   color: var(--text-secondary);
 }
 
-/* Date input color fix for dark mode */
-.field-group input[type="date"] {
+/* Date/datetime input color fix for dark mode */
+.field-group input[type="date"],
+.field-group input[type="datetime-local"] {
   color-scheme: dark;
 }
 

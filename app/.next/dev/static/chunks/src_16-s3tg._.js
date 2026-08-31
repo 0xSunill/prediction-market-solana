@@ -136,12 +136,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$constants$2e
 ;
 function MarketCard({ market }) {
     const { question, yesPool, noPool, resolved, outcome, resolutionTime } = market.account;
-    const resolveDate = new Date(Number(resolutionTime) * 1000);
-    const resolveDateStr = resolveDate.toLocaleDateString('en-US', {
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric'
-    });
+    const resolveDateTime = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$constants$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["formatDateTime"])(resolutionTime);
+    const countdown = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$constants$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["timeUntil"])(resolutionTime);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "market-card glass-panel animate-fade-in",
         children: [
@@ -153,7 +149,7 @@ function MarketCard({ market }) {
                         children: question
                     }, void 0, false, {
                         fileName: "[project]/src/components/MarketCard.tsx",
-                        lineNumber: 31,
+                        lineNumber: 27,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -167,7 +163,7 @@ function MarketCard({ market }) {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/MarketCard.tsx",
-                                lineNumber: 33,
+                                lineNumber: 29,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -175,7 +171,7 @@ function MarketCard({ market }) {
                                 children: "·"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/MarketCard.tsx",
-                                lineNumber: 34,
+                                lineNumber: 30,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -186,27 +182,51 @@ function MarketCard({ market }) {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/MarketCard.tsx",
-                                lineNumber: 35,
+                                lineNumber: 31,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/MarketCard.tsx",
-                        lineNumber: 32,
+                        lineNumber: 28,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "market-resolves",
-                        children: resolved ? `Resolved: ${outcome ? 'YES ✅' : 'NO ❌'}` : `Resolves: ${resolveDateStr}`
+                        children: resolved ? `Resolved: ${outcome ? 'YES ✅' : 'NO ❌'}` : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+                            children: [
+                                "Resolves: ",
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                    children: resolveDateTime
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/MarketCard.tsx",
+                                    lineNumber: 37,
+                                    columnNumber: 27
+                                }, this),
+                                ' ',
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                    className: "countdown-badge",
+                                    children: countdown
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/MarketCard.tsx",
+                                    lineNumber: 38,
+                                    columnNumber: 22
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/src/components/MarketCard.tsx",
+                            lineNumber: 36,
+                            columnNumber: 15
+                        }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/MarketCard.tsx",
-                        lineNumber: 37,
+                        lineNumber: 33,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/MarketCard.tsx",
-                lineNumber: 30,
+                lineNumber: 26,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -218,7 +238,7 @@ function MarketCard({ market }) {
                         children: "YES"
                     }, void 0, false, {
                         fileName: "[project]/src/components/MarketCard.tsx",
-                        lineNumber: 45,
+                        lineNumber: 44,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -227,19 +247,19 @@ function MarketCard({ market }) {
                         children: "NO"
                     }, void 0, false, {
                         fileName: "[project]/src/components/MarketCard.tsx",
-                        lineNumber: 48,
+                        lineNumber: 47,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/MarketCard.tsx",
-                lineNumber: 44,
+                lineNumber: 43,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/MarketCard.tsx",
-        lineNumber: 29,
+        lineNumber: 25,
         columnNumber: 5
     }, this);
 }
@@ -809,10 +829,14 @@ __turbopack_context__.s([
     ()=>PROGRAM_ID,
     "formatCurrency",
     ()=>formatCurrency,
+    "formatDateTime",
+    ()=>formatDateTime,
     "formatSol",
     ()=>formatSol,
     "lamportsToSol",
-    ()=>lamportsToSol
+    ()=>lamportsToSol,
+    "timeUntil",
+    ()=>timeUntil
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$solana$2f$web3$2e$js$2f$lib$2f$index$2e$browser$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@solana/web3.js/lib/index.browser.esm.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$idl$2f$prediction_market$2e$json$2e5b$json$5d2e$cjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/idl/prediction_market.json.[json].cjs [app-client] (ecmascript)");
@@ -822,6 +846,27 @@ const PROGRAM_ID = new __TURBOPACK__imported__module__$5b$project$5d2f$node_modu
 const LAMPORTS_PER_SOL = 1_000_000_000;
 const lamportsToSol = (lamports)=>Number(lamports) / LAMPORTS_PER_SOL;
 const formatSol = (lamports, decimals = 4)=>`${lamportsToSol(lamports).toFixed(decimals)} SOL`;
+const formatDateTime = (unixSeconds)=>{
+    const d = new Date(Number(unixSeconds) * 1000);
+    return d.toLocaleString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+    });
+};
+const timeUntil = (unixSeconds)=>{
+    const diffMs = Number(unixSeconds) * 1000 - Date.now();
+    if (diffMs <= 0) return 'Expired';
+    const diffMins = Math.floor(diffMs / 60_000);
+    if (diffMins < 60) return `in ${diffMins}m`;
+    const diffHours = Math.floor(diffMins / 60);
+    if (diffHours < 24) return `in ${diffHours}h`;
+    const diffDays = Math.floor(diffHours / 24);
+    return `in ${diffDays}d`;
+};
 const formatCurrency = (lamports)=>{
     const sol = lamportsToSol(lamports);
     return new Intl.NumberFormat('en-US', {

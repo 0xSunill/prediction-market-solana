@@ -1,8 +1,14 @@
 "use client";
 import Link from 'next/link';
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import dynamic from 'next/dynamic';
 import { TrendingUp } from 'lucide-react';
 import './Navbar.css';
+
+// WalletMultiButton must be client-only — it causes SSR hydration mismatch
+const WalletMultiButton = dynamic(
+  () => import('@solana/wallet-adapter-react-ui').then(m => m.WalletMultiButton),
+  { ssr: false }
+);
 
 export function Navbar() {
   return (
@@ -10,7 +16,7 @@ export function Navbar() {
       <div className="navbar-brand">
         <Link href="/" className="logo">
           <TrendingUp className="logo-icon" />
-          <span>Prediction Market</span>
+          <span>Siva Satta 🚀</span>
         </Link>
       </div>
 

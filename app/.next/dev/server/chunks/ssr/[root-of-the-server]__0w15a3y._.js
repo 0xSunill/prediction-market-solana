@@ -726,10 +726,14 @@ __turbopack_context__.s([
     ()=>PROGRAM_ID,
     "formatCurrency",
     ()=>formatCurrency,
+    "formatDateTime",
+    ()=>formatDateTime,
     "formatSol",
     ()=>formatSol,
     "lamportsToSol",
-    ()=>lamportsToSol
+    ()=>lamportsToSol,
+    "timeUntil",
+    ()=>timeUntil
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$solana$2f$web3$2e$js$2f$lib$2f$index$2e$esm$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@solana/web3.js/lib/index.esm.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$idl$2f$prediction_market$2e$json$2e5b$json$5d2e$cjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/idl/prediction_market.json.[json].cjs [app-ssr] (ecmascript)");
@@ -739,6 +743,27 @@ const PROGRAM_ID = new __TURBOPACK__imported__module__$5b$project$5d2f$node_modu
 const LAMPORTS_PER_SOL = 1_000_000_000;
 const lamportsToSol = (lamports)=>Number(lamports) / LAMPORTS_PER_SOL;
 const formatSol = (lamports, decimals = 4)=>`${lamportsToSol(lamports).toFixed(decimals)} SOL`;
+const formatDateTime = (unixSeconds)=>{
+    const d = new Date(Number(unixSeconds) * 1000);
+    return d.toLocaleString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+    });
+};
+const timeUntil = (unixSeconds)=>{
+    const diffMs = Number(unixSeconds) * 1000 - Date.now();
+    if (diffMs <= 0) return 'Expired';
+    const diffMins = Math.floor(diffMs / 60_000);
+    if (diffMins < 60) return `in ${diffMins}m`;
+    const diffHours = Math.floor(diffMins / 60);
+    if (diffHours < 24) return `in ${diffHours}h`;
+    const diffDays = Math.floor(diffHours / 24);
+    return `in ${diffDays}d`;
+};
 const formatCurrency = (lamports)=>{
     const sol = lamportsToSol(lamports);
     return new Intl.NumberFormat('en-US', {

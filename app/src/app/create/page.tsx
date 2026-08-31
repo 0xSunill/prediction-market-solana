@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { useProgram } from '../../hooks/useProgram';
 import { PROGRAM_ID } from '../../utils/constants';
+import { sendTx, extractErrorMessage } from '../../utils/sendTx';
 import './page.css';
 
 export default function CreateMarket() {
@@ -19,10 +20,14 @@ export default function CreateMarket() {
 
   const [question, setQuestion] = useState('');
   // Default resolution date: 90 days from today
-  const defaultDate = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000)
-    .toISOString()
-    .slice(0, 10);
-  const [resolutionDate, setResolutionDate] = useState(defaultDate);
+  // Default: 90 days from now, rounded to nearest hour
+  const defaultDateTime = (() => {
+    const d = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000);
+    d.setMinutes(0, 0, 0);
+    // datetime-local value format: "YYYY-MM-DDTHH:mm"
+    return d.toISOString().slice(0, 16);
+  })();
+  const [resolutionDate, setResolutionDate] = useState(defaultDateTime);
   const [marketId, setMarketId] = useState('1');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -41,6 +46,7 @@ export default function CreateMarket() {
       return;
     }
 
+    // Parse datetime-local value as local time
     const resolutionTimestamp = Math.floor(new Date(resolutionDate).getTime() / 1000);
     if (resolutionTimestamp <= Math.floor(Date.now() / 1000)) {
       setError('Resolution time must be in the future.');
@@ -73,14 +79,12 @@ export default function CreateMarket() {
         .instruction();
 
       const { Transaction } = await import('@solana/web3.js');
-      const tx = new Transaction().add(ix);
-      const signature = await sendTransaction(tx, connection);
-      await connection.confirmTransaction(signature, 'processed');
+      await sendTx(new Transaction().add(ix), connection, publicKey, sendTransaction);
 
       router.push('/');
     } catch (e: any) {
-      console.error(e);
-      setError(e?.message ?? 'Transaction failed. See console for details.');
+      console.error(String(e));
+      setError(extractErrorMessage(e));
     } finally {
       setLoading(false);
     }
@@ -112,7 +116,7 @@ export default function CreateMarket() {
           <label htmlFor="resolution-time">Resolution Time</label>
           <input
             id="resolution-time"
-            type="date"
+            type="datetime-local"
             value={resolutionDate}
             onChange={(e) => setResolutionDate(e.target.value)}
           />
