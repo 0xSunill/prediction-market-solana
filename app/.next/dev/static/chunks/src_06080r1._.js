@@ -747,18 +747,27 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 "use strict";
 
 __turbopack_context__.s([
+    "LAMPORTS_PER_SOL",
+    ()=>LAMPORTS_PER_SOL,
     "PROGRAM_ID",
     ()=>PROGRAM_ID,
     "formatCurrency",
-    ()=>formatCurrency
+    ()=>formatCurrency,
+    "formatSol",
+    ()=>formatSol,
+    "lamportsToSol",
+    ()=>lamportsToSol
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$solana$2f$web3$2e$js$2f$lib$2f$index$2e$browser$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@solana/web3.js/lib/index.browser.esm.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$idl$2f$prediction_market$2e$json$2e5b$json$5d2e$cjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/idl/prediction_market.json.[json].cjs [app-client] (ecmascript)");
 ;
 ;
 const PROGRAM_ID = new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$solana$2f$web3$2e$js$2f$lib$2f$index$2e$browser$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PublicKey"](__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$idl$2f$prediction_market$2e$json$2e5b$json$5d2e$cjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].address);
+const LAMPORTS_PER_SOL = 1_000_000_000;
+const lamportsToSol = (lamports)=>Number(lamports) / LAMPORTS_PER_SOL;
+const formatSol = (lamports, decimals = 4)=>`${lamportsToSol(lamports).toFixed(decimals)} SOL`;
 const formatCurrency = (lamports)=>{
-    const sol = Number(lamports) / 1_000_000_000;
+    const sol = lamportsToSol(lamports);
     return new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',

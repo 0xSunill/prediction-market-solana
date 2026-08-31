@@ -84,4 +84,29 @@
   box-shadow: 0 4px 12px #00d3954d;
 }
 
+.loading-state, .empty-state {
+  text-align: center;
+  color: var(--text-secondary);
+  background: var(--bg-glass);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-glass);
+  padding: 3rem 2rem;
+  font-size: 1rem;
+}
+
+.back-link {
+  color: var(--text-secondary);
+  transition: color var(--transition-speed) ease;
+  align-items: center;
+  gap: .5rem;
+  margin-bottom: 1.5rem;
+  font-size: .875rem;
+  font-weight: 500;
+  display: inline-flex;
+}
+
+.back-link:hover {
+  color: var(--text-primary);
+}
+
 /*# sourceMappingURL=src_app_portfolio_page_1dwzh_m.css.map*/

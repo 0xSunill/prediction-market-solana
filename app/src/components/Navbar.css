@@ -1,44 +1,54 @@
 .navbar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  margin: 1rem 2rem;
-  border-radius: 16px;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 64px;
   position: sticky;
-  top: 1rem;
+  top: 0;
   z-index: 100;
+  border-radius: 0;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid var(--border-glass);
 }
 
-.navbar-brand .logo {
+.logo {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.625rem;
   font-family: 'Outfit', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 800;
+  font-weight: 700;
+  font-size: 1.125rem;
   color: var(--text-primary);
 }
 
 .logo-icon {
+  width: 22px;
+  height: 22px;
   color: var(--accent-color);
 }
 
-.navbar-links {
+.navbar-actions {
   display: flex;
-  gap: 2rem;
   align-items: center;
+  gap: 1rem;
 }
 
-.nav-link {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+.create-link {
+  font-size: 0.875rem;
   font-weight: 600;
   color: var(--text-secondary);
-  transition: color var(--transition-speed) ease;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-glass);
+  border-radius: 8px;
+  transition: all var(--transition-speed) ease;
+  white-space: nowrap;
 }
 
-.nav-link:hover {
+.create-link:hover {
   color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
 }

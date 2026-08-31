@@ -1,46 +1,71 @@
 .home-page {
-  max-width: 1200px;
+  max-width: 860px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-.hero-section {
-  text-align: center;
-  padding: 4rem 0;
-  margin-bottom: 2rem;
-}
-
-.hero-title {
-  font-size: 4rem;
-  background: linear-gradient(to right, #fff, #8b949e);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 1rem;
-}
-
-.hero-subtitle {
-  font-size: 1.25rem;
-  color: var(--text-secondary);
-}
-
-.markets-header {
-  margin-bottom: 2rem;
+.markets-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
   border-bottom: 1px solid var(--border-glass);
-  padding-bottom: 1rem;
 }
 
-.markets-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 1.5rem;
+.markets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-.loading-state, .empty-state {
+.state-box {
   text-align: center;
-  padding: 4rem;
+  padding: 3rem 2rem;
   color: var(--text-secondary);
-  font-size: 1.125rem;
+  font-size: 1rem;
   background: var(--bg-glass);
   border-radius: var(--border-radius);
   border: 1px solid var(--border-glass);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.empty-create-link {
+  color: var(--accent-color);
+  font-weight: 600;
+  transition: color var(--transition-speed) ease;
+}
+
+.empty-create-link:hover {
+  color: var(--accent-hover);
+}
+
+.home-footer {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.create-market-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--accent-color);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--border-radius);
+  transition: all var(--transition-speed) ease;
+  text-decoration: none;
+}
+
+.create-market-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
 }

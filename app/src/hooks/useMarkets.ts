@@ -23,6 +23,7 @@ export function useMarkets() {
           resolved: acc.account.resolved,
           outcome: acc.account.outcome,
           resolutionTime: acc.account.resolutionTime.toString(),
+          creator: acc.account.creator.toString(),
         }
       }));
 

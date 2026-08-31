@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useMarkets } from '../hooks/useMarkets';
 import { MarketCard } from '../components/MarketCard';
 import './page.css';
@@ -9,27 +10,29 @@ export default function Home() {
 
   return (
     <div className="home-page animate-fade-in">
-      <div className="hero-section">
-        <h1 className="hero-title">Predict the Future.</h1>
-        <p className="hero-subtitle">Trade on the world's most highly-anticipated events.</p>
-      </div>
+      <div className="markets-section">
+        <h2 className="markets-heading">Markets</h2>
 
-      <div className="markets-container">
-        <div className="markets-header">
-          <h2>Trending Markets</h2>
-        </div>
-        
         {loading ? (
-          <div className="loading-state">Loading markets...</div>
+          <div className="state-box">Loading markets…</div>
         ) : markets.length === 0 ? (
-          <div className="empty-state">No active markets found.</div>
+          <div className="state-box">
+            <p>No active markets found.</p>
+            <Link href="/create" className="empty-create-link">Create the first market →</Link>
+          </div>
         ) : (
-          <div className="markets-grid">
+          <div className="markets-list">
             {markets.map((market) => (
               <MarketCard key={market.publicKey} market={market} />
             ))}
           </div>
         )}
+      </div>
+
+      <div className="home-footer">
+        <Link href="/create" className="create-market-btn">
+          + Create Market
+        </Link>
       </div>
     </div>
   );

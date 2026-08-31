@@ -57,6 +57,12 @@
       "namedRegex": "^/admin(?:/)?$"
     },
     {
+      "page": "/create",
+      "regex": "^/create(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/create(?:/)?$"
+    },
+    {
       "page": "/portfolio",
       "regex": "^/portfolio(?:/)?$",
       "routeKeys": {},

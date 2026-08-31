@@ -82,3 +82,29 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 211, 149, 0.3);
 }
+
+.loading-state,
+.empty-state {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  background: var(--bg-glass);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-glass);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  transition: color var(--transition-speed) ease;
+}
+
+.back-link:hover {
+  color: var(--text-primary);
+}

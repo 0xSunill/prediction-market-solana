@@ -1,7 +1,7 @@
 "use client";
 import Link from 'next/link';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
-import { LayoutDashboard, TrendingUp } from 'lucide-react';
+import { TrendingUp } from 'lucide-react';
 import './Navbar.css';
 
 export function Navbar() {
@@ -10,19 +10,14 @@ export function Navbar() {
       <div className="navbar-brand">
         <Link href="/" className="logo">
           <TrendingUp className="logo-icon" />
-          <span>SivaSatta</span>
-        </Link>
-      </div>
-      
-      <div className="navbar-links">
-        <Link href="/" className="nav-link">Markets</Link>
-        <Link href="/portfolio" className="nav-link">
-          <LayoutDashboard size={18} />
-          <span>Portfolio</span>
+          <span>Prediction Market</span>
         </Link>
       </div>
 
       <div className="navbar-actions">
+        <Link href="/create" className="create-link">
+          + Create Market
+        </Link>
         <WalletMultiButton />
       </div>
     </nav>

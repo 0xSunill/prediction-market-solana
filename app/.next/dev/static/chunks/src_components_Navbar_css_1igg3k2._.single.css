@@ -1,47 +1,57 @@
 /* [project]/src/components/Navbar.css [app-client] (css) */
 .navbar {
   z-index: 100;
-  border-radius: 16px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid var(--border-glass);
+  border-radius: 0;
   justify-content: space-between;
   align-items: center;
-  margin: 1rem 2rem;
-  padding: 1rem 2rem;
+  height: 64px;
+  padding: 0 2rem;
   display: flex;
   position: sticky;
-  top: 1rem;
+  top: 0;
 }
 
-.navbar-brand .logo {
+.logo {
   color: var(--text-primary);
   align-items: center;
-  gap: .5rem;
+  gap: .625rem;
   font-family: Outfit, sans-serif;
-  font-size: 1.5rem;
-  font-weight: 800;
+  font-size: 1.125rem;
+  font-weight: 700;
   display: flex;
 }
 
 .logo-icon {
+  width: 22px;
+  height: 22px;
   color: var(--accent-color);
 }
 
-.navbar-links {
+.navbar-actions {
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
   display: flex;
 }
 
-.nav-link {
+.create-link {
   color: var(--text-secondary);
-  transition: color var(--transition-speed) ease;
-  align-items: center;
-  gap: .5rem;
+  border: 1px solid var(--border-glass);
+  transition: all var(--transition-speed) ease;
+  white-space: nowrap;
+  border-radius: 8px;
+  padding: .5rem 1rem;
+  font-size: .875rem;
   font-weight: 600;
-  display: flex;
 }
 
-.nav-link:hover {
+.create-link:hover {
   color: var(--text-primary);
+  background: #ffffff0d;
+  border-color: #fff3;
 }
 
 /*# sourceMappingURL=src_components_Navbar_css_1igg3k2._.single.css.map*/

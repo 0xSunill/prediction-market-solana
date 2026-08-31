@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { formatCurrency } from '../utils/constants';
+import { formatSol } from '../utils/constants';
 import './MarketCard.css';
 
 export interface MarketData {
@@ -12,52 +12,43 @@ export interface MarketData {
     resolved: boolean;
     outcome: boolean | null;
     resolutionTime: string;
+    creator: string;
   };
 }
 
 export function MarketCard({ market }: { market: MarketData }) {
-  const { question, yesPool, noPool, resolved, outcome } = market.account;
-  const yes = Number(yesPool);
-  const no = Number(noPool);
-  const total = yes + no;
-  
-  const yesProb = total > 0 ? Math.round((yes / total) * 100) : 50;
-  const noProb = total > 0 ? Math.round((no / total) * 100) : 50;
+  const { question, yesPool, noPool, resolved, outcome, resolutionTime } = market.account;
+  const resolveDate = new Date(Number(resolutionTime) * 1000);
+  const resolveDateStr = resolveDate.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
 
   return (
-    <Link href={`/market/${market.account.marketId}`} className="market-card glass-panel animate-fade-in">
-      <div className="market-header">
-        <h3 className="market-question">{question}</h3>
-      </div>
-      
-      <div className="market-stats">
-        <div className="stat-item">
-          <span className="stat-label">Vol</span>
-          <span className="stat-value">{formatCurrency(total)}</span>
+    <div className="market-card glass-panel animate-fade-in">
+      <div className="market-card-body">
+        <p className="market-question">{question}</p>
+        <div className="market-pools">
+          <span className="pool-yes">YES: {formatSol(yesPool)}</span>
+          <span className="pool-sep">·</span>
+          <span className="pool-no">NO: {formatSol(noPool)}</span>
         </div>
-        <div className="stat-item">
-          <span className="stat-label">Status</span>
-          <span className={`stat-value ${resolved ? 'resolved' : 'active'}`}>
-            {resolved ? (outcome ? 'Resolved YES' : 'Resolved NO') : 'Active'}
-          </span>
-        </div>
+        <p className="market-resolves">
+          {resolved
+            ? `Resolved: ${outcome ? 'YES ✅' : 'NO ❌'}`
+            : `Resolves: ${resolveDateStr}`}
+        </p>
       </div>
 
-      <div className="market-probabilities">
-        <div className="prob-bar yes-bar" style={{ width: `${yesProb}%` }}></div>
-        <div className="prob-bar no-bar" style={{ width: `${noProb}%` }}></div>
+      <div className="market-card-actions">
+        <Link href={`/market/${market.account.marketId}`} className="bet-btn yes-btn">
+          YES
+        </Link>
+        <Link href={`/market/${market.account.marketId}`} className="bet-btn no-btn">
+          NO
+        </Link>
       </div>
-
-      <div className="market-actions">
-        <button className="bet-btn yes-btn">
-          <span>Yes</span>
-          <span className="prob-text">{yesProb}%</span>
-        </button>
-        <button className="bet-btn no-btn">
-          <span>No</span>
-          <span className="prob-text">{noProb}%</span>
-        </button>
-      </div>
-    </Link>
+    </div>
   );
 }

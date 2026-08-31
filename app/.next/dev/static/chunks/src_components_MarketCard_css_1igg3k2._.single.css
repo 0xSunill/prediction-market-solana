@@ -1,119 +1,116 @@
 /* [project]/src/components/MarketCard.css [app-client] (css) */
 .market-card {
-  color: inherit;
-  transition: all var(--transition-speed) ease;
-  flex-direction: column;
-  height: 100%;
+  transition: border-color var(--transition-speed) ease,
+              transform var(--transition-speed) ease;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
   padding: 1.5rem;
-  text-decoration: none;
   display: flex;
 }
 
 .market-card:hover {
   border-color: #ffffff26;
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px #0006;
+  transform: translateY(-1px);
 }
 
-.market-header {
-  flex-grow: 1;
-  margin-bottom: 1rem;
+.market-card-body {
+  flex: 1;
+  min-width: 0;
 }
 
 .market-question {
-  margin: 0;
-  font-size: 1.125rem;
+  color: var(--text-primary);
+  margin-bottom: .5rem;
+  font-size: 1rem;
+  font-weight: 600;
   line-height: 1.4;
 }
 
-.market-stats {
-  justify-content: space-between;
-  margin-bottom: 1rem;
-  font-size: .875rem;
-  display: flex;
-}
-
-.stat-item {
+.market-pools {
   align-items: center;
   gap: .5rem;
+  margin-bottom: .375rem;
+  font-size: .875rem;
+  font-weight: 500;
   display: flex;
 }
 
-.stat-label {
+.pool-yes {
+  color: var(--yes-color);
+}
+
+.pool-no {
+  color: var(--no-color);
+}
+
+.pool-sep {
   color: var(--text-secondary);
 }
 
-.stat-value {
-  font-weight: 600;
+.market-resolves {
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: .8125rem;
 }
 
-.stat-value.active {
-  color: var(--accent-color);
-}
-
-.stat-value.resolved {
-  color: #fbbf24;
-}
-
-.market-probabilities {
-  background: var(--bg-color-light);
-  border-radius: 3px;
-  height: 6px;
-  margin-bottom: 1.5rem;
-  display: flex;
-  overflow: hidden;
-}
-
-.prob-bar {
-  height: 100%;
-  transition: width .5s;
-}
-
-.yes-bar {
-  background-color: var(--yes-color);
-}
-
-.no-bar {
-  background-color: var(--no-color);
-}
-
-.market-actions {
-  gap: 1rem;
+.market-card-actions {
+  flex-shrink: 0;
+  gap: .625rem;
   display: flex;
 }
 
 .bet-btn {
   transition: all var(--transition-speed) ease;
+  cursor: pointer;
+  border: none;
   border-radius: 8px;
-  flex: 1;
-  justify-content: space-between;
-  padding: .75rem 1rem;
-  font-weight: 600;
-  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: .5rem 1.25rem;
+  font-size: .875rem;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
 }
 
 .yes-btn {
-  background-color: var(--yes-bg);
+  background: var(--yes-bg);
   color: var(--yes-color);
+  border: 1px solid #00d39533;
 }
 
 .yes-btn:hover {
-  background-color: var(--yes-color);
-  color: var(--bg-color);
+  background: var(--yes-color);
+  color: #000;
+  transform: translateY(-1px);
 }
 
 .no-btn {
-  background-color: var(--no-bg);
+  background: var(--no-bg);
   color: var(--no-color);
+  border: 1px solid #ff3b6933;
 }
 
 .no-btn:hover {
-  background-color: var(--no-color);
-  color: var(--bg-color);
+  background: var(--no-color);
+  color: #fff;
+  transform: translateY(-1px);
 }
 
-.prob-text {
-  font-weight: 700;
+@media (max-width: 600px) {
+  .market-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .market-card-actions {
+    width: 100%;
+  }
+
+  .bet-btn {
+    flex: 1;
+  }
 }
 
 /*# sourceMappingURL=src_components_MarketCard_css_1igg3k2._.single.css.map*/

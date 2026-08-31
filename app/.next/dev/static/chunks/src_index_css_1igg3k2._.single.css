@@ -34,7 +34,6 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin-bottom: .5rem;
   font-family: Outfit, sans-serif;
   font-weight: 700;
 }
@@ -102,6 +101,17 @@ button {
 .wallet-adapter-button:hover {
   transform: translateY(-1px);
   background-color: var(--accent-hover) !important;
+}
+
+.app-container {
+  flex-direction: column;
+  min-height: 100vh;
+  display: flex;
+}
+
+.main-content {
+  flex: 1;
+  padding-top: 0;
 }
 
 /*# sourceMappingURL=src_index_css_1igg3k2._.single.css.map*/
