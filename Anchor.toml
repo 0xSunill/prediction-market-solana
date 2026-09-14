@@ -7,10 +7,13 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-prediction_market = "BvCRDzi8M5f5NREyoKZ62bjxR5kN1yiKu4iHqTmFCzcY"
+prediction_market = "D3R2C6F5eX9gV4iA3w7K81L6m2N5p9x8y7z4w6v1u2i"
+
+[programs.devnet]
+prediction_market = "D3R2C6F5eX9gV4iA3w7K81L6m2N5p9x8y7z4w6v1u2i"
 
 [provider]
-cluster = "localnet"
+cluster = "devnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]
