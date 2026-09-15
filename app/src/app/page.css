@@ -69,3 +69,12 @@
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
 }
+
+@media (max-width: 600px) {
+  .home-page {
+    padding: 1.5rem 1rem;
+  }
+  .state-box {
+    padding: 2rem 1rem;
+  }
+}

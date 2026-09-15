@@ -52,3 +52,20 @@
   border-color: rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.05);
 }
+
+@media (max-width: 600px) {
+  .navbar {
+    padding: 0 1rem;
+  }
+  .logo {
+    font-size: 1rem;
+    gap: 0.4rem;
+  }
+  .navbar-actions {
+    gap: 0.5rem;
+  }
+  .create-link {
+    padding: 0.4rem 0.5rem;
+    font-size: 0.75rem;
+  }
+}
